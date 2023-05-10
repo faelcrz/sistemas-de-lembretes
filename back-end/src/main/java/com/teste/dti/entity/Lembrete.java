@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -20,13 +21,13 @@ public class Lembrete {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long id;
 	
-	@NotNull
+	@NotBlank(message = "O campo “Nome” deve estar preenchido")
 	private String nome;
 	
-	@Future
-	@NotNull
+	@Future(message = "A data precisa estar no futuro.")
+	@NotNull(message = "O campo “Data” deve estar preenchido")
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 
 	public long getId() {
