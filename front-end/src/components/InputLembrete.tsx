@@ -42,7 +42,7 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   display: block;
-  button:hover {
+  &:hover {
     background-color: #005ea3;
   }
 `;
@@ -66,16 +66,21 @@ const InputLembrete = () => {
 
   const formattedDate = (dateString: string) => {
     const date = new Date(dateString);
+    date.setDate(date.getDate() + 2); 
     const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
     return formattedDate;
   };
-
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       const formatted = formattedDate(data.toISOString());
+      const currentDate = new Date();
+      if (currentDate > data) {
+        alert('A data selecionada precisa ser uma data futura.');
+        return;
+      }
       await api.post('/lembretes/cadastrar', { nome, data: formatted  });
       alert('Lembrete criado com sucesso!');
       window.location.reload();

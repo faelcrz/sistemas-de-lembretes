@@ -60,7 +60,6 @@ function Lembretes() {
   useEffect(() => {
     api.get('lembretes/listar-ordenados-por-data')
     .then(response => {
-      console.log(response.data);
       setLembretes(response.data);
     })
     .catch(error => {
