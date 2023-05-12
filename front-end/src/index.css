@@ -7,9 +7,18 @@
 
 body{
   padding: 2rem;
+<<<<<<< HEAD
   background:  #33b4c4;
 }
 
+=======
+}
+
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+>>>>>>> 44f62a1600d7f80029f79c8c6e09e61efeb4402c
 
 form {
   display: flex;
@@ -21,6 +30,31 @@ label {
   margin: 10px;
 }
 
+<<<<<<< HEAD
+=======
+input {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 5px;
+  margin: 10px;
+  width: 100px;
+  border-radius: 16px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  cursor: pointer;
+  
+}
+
+button:hover {
+  background-color: #005ea3;
+}
+>>>>>>> 44f62a1600d7f80029f79c8c6e09e61efeb4402c
 
 ol {
   margin: 20px;
@@ -41,3 +75,28 @@ form {
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
+=======
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.form-input {
+  width: 400px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.button-deletar {
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #cc0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+>>>>>>> 44f62a1600d7f80029f79c8c6e09e61efeb4402c
