@@ -28,7 +28,7 @@ O projeto do Sistema de Lembretes corresponde a uma API seguindo os padrões RES
  * Padrões de cores foi utilizado(As principais cores da empresa)
     * `#33b4c4` e `#e31c79`
  * Captura de tela do front-end
-  ![image](https://github.com/faelcrz/teste-dti/assets/49538724/4e42ca22-2284-48de-8318-644f6d1facdf)
+  ![alt text] <img src=".\screenshots\Screenshot.png">
 
  #### Github
  * Utilizado por ser um metódo mais convencional de versionamento.
