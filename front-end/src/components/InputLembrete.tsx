@@ -17,8 +17,6 @@ const Container = styled.div`
   margin: auto;
 `;
 
-
-
 const Form = styled.form`
   width: 400px;
   padding: 5px;
@@ -51,25 +49,34 @@ const Button = styled.button`
 
 const Title = styled.h1`
   color: #e31c79;
-  
 `;
+
 const InputLembrete = () => {
   const [nome, setNome] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState(new Date());
 
   const handleNomeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNome(event.target.value);
   };
 
   const handleDataChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setData(event.target.value);
+    const selectedDate = new Date(event.target.value);
+    setData(selectedDate);
   };
+
+  const formattedDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+    return formattedDate;
+  };
+
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      await api.post('/lembretes/cadastrar', { nome, data });
+      const formatted = formattedDate(data.toISOString());
+      await api.post('/lembretes/cadastrar', { nome, data: formatted  });
       alert('Lembrete criado com sucesso!');
       window.location.reload();
     } catch (error) {
@@ -82,17 +89,15 @@ const InputLembrete = () => {
       <Title>NOVO LEMBRETE</Title>
       <Form onSubmit={handleSubmit}>
         <Input
-          className="form-input"
           type="text"
           placeholder="Nome do Lembrete"
           value={nome}
           onChange={handleNomeChange}
         />
         <Input
-          className="form-input"
-          type="text"
+          type="date"
           placeholder="Data do Lembrete (no formato DD/MM/YYYY)"
-          value={data}
+          value={data.toISOString().substr(0, 10)}
           onChange={handleDataChange}
         />
         <Button type="submit">Criar</Button>

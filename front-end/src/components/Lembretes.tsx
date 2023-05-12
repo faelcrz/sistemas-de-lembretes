@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { LembretesClass } from '../interface/LembretesClass.tsx';
+import { LembretesClass } from '../models/LembretesClass.tsx';
 import api from "../services/api";
 import styled from "styled-components";
 
@@ -40,9 +40,9 @@ const CustomList = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
-  
+  width: 100%; 
 `;
+
 const CustomListItem = styled.li`
   margin: 10;
   padding: 10;
@@ -58,7 +58,7 @@ function Lembretes() {
   const [lembretes, setLembretes] = useState< LembretesClass >({});
 
   useEffect(() => {
-    api.get('lembretes/ordenados-por-data')
+    api.get('lembretes/listar-ordenados-por-data')
     .then(response => {
       console.log(response.data);
       setLembretes(response.data);
