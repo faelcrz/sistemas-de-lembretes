@@ -1,5 +1,6 @@
 package com.teste.dti.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;

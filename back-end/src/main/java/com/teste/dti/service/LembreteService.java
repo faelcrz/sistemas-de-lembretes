@@ -4,10 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -28,10 +30,6 @@ public class LembreteService {
 		
 	public ResponseEntity< ? > cadastrarLembrete(Lembrete lembrete){
 	    try {
-	        Calendar calendar = Calendar.getInstance();
-	        calendar.setTime(lembrete.getData());
-	        calendar.add(Calendar.DAY_OF_MONTH, 1);
-	        lembrete.setData(calendar.getTime()); 
 	        Lembrete cadastrarLembrete = repository.save(lembrete);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(cadastrarLembrete);
 	    } catch (ConstraintViolationException ex) {
