@@ -5,10 +5,9 @@ function App() {
   
   return (
     <>
-
         <div className="App">
-          <h1>Novo Lembrete</h1>
           <InputLembrete/>
+          <br/>
           <Lembretes/>
         </div>
 

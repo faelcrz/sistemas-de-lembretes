@@ -1,6 +1,58 @@
 import React, { useState } from 'react';
 import api from '../services/api';
+import styled from 'styled-components';
 
+const Container = styled.div`
+  background: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+`;
+
+
+
+const Form = styled.form`
+  width: 400px;
+  padding: 5px;
+  margin-right: 10px;
+  
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+`;
+
+const Button = styled.button`
+  padding: 5px;
+  margin: 10px auto;
+  width: 100px;
+  border-radius: 16px;
+  background-color: #33b4c4;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: block;
+  button:hover {
+    background-color: #005ea3;
+  }
+`;
+
+const Title = styled.h1`
+  color: #e31c79;
+  
+`;
 const InputLembrete = () => {
   const [nome, setNome] = useState('');
   const [data, setData] = useState('');
@@ -19,35 +71,33 @@ const InputLembrete = () => {
     try {
       await api.post('/lembretes/cadastrar', { nome, data });
       alert('Lembrete criado com sucesso!');
-      console.log(data);
       window.location.reload();
     } catch (error) {
-      console.log(error);
-      console.log(data);
       alert('Erro ao criar lembrete.');
     }
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <input
+    <Container>
+      <Title>NOVO LEMBRETE</Title>
+      <Form onSubmit={handleSubmit}>
+        <Input
           className="form-input"
           type="text"
-          placeholder="Digite o nome do Lembrete."
+          placeholder="Nome do Lembrete"
           value={nome}
           onChange={handleNomeChange}
         />
-        <input
+        <Input
           className="form-input"
           type="text"
-          placeholder="Digite a data do Lembrete no formato DD/MM/YYYY"
+          placeholder="Data do Lembrete (no formato DD/MM/YYYY)"
           value={data}
           onChange={handleDataChange}
         />
-        <button type="submit">Criar</button>
-      </form>
-    </div>
+        <Button type="submit">Criar</Button>
+      </Form>
+    </Container>
   );
 };
 
