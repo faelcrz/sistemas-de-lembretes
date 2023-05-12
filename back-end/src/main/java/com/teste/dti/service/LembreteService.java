@@ -2,6 +2,9 @@ package com.teste.dti.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +28,10 @@ public class LembreteService {
 		
 	public ResponseEntity< ? > cadastrarLembrete(Lembrete lembrete){
 	    try {
+	        Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(lembrete.getData());
+	        calendar.add(Calendar.DAY_OF_MONTH, 1);
+	        lembrete.setData(calendar.getTime()); 
 	        Lembrete cadastrarLembrete = repository.save(lembrete);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(cadastrarLembrete);
 	    } catch (ConstraintViolationException ex) {
@@ -42,7 +49,8 @@ public class LembreteService {
 	
 	public ResponseEntity<Map<String, List<Lembrete>>> listarLembretesPorData() {
 	    List<Lembrete> lembretes = repository.findAll();
-	    Map<String, List<Lembrete>> lembretesPorData = new TreeMap<>();
+	    Collections.sort(lembretes, (l1, l2) -> l1.getData().compareTo(l2.getData())); 
+	    Map<String, List<Lembrete>> lembretesPorData = new LinkedHashMap<>();
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	    for (Lembrete lembrete : lembretes) {
 	        String dataString = sdf.format(lembrete.getData());
@@ -54,6 +62,7 @@ public class LembreteService {
 
 	    return ResponseEntity.ok().body(lembretesPorData);
 	}
+
 	
 	public ResponseEntity<?> deletarLembrete(Long id) {
 	    return repository.findById(id).map(resp -> {
@@ -63,16 +72,4 @@ public class LembreteService {
 	}
 
 
-	public ResponseEntity<Lembrete> atualizarLembrete(Long id, Lembrete lembreteAtualizado) {
-	    Optional<Lembrete> lembreteExistente = repository.findById(id);
-	    if (!lembreteExistente.isPresent()) {
-	        return ResponseEntity.notFound().build();
-	    }
-
-	    Lembrete lembrete = lembreteExistente.get();
-	    lembrete.setNome(lembreteAtualizado.getNome());
-	    lembrete.setData(lembreteAtualizado.getData());
-	    
-	    return ResponseEntity.ok(repository.save(lembrete));
-	}
 }

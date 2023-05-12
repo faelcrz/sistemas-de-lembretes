@@ -28,19 +28,9 @@ public class LembreteController {
 		return service.cadastrarLembrete(lembrete);
 	}
 	
-	@GetMapping("/listar")
-	public ResponseEntity<List<Lembrete>> listarLembretes(){
-		return service.listarLembretes();
-	}
-	
-	@GetMapping("/ordenados-por-data")
+	@GetMapping("/listar-ordenados-por-data")
 	public ResponseEntity<Map<String, List<Lembrete>>> listarLembretesPorDia(){
 		return service.listarLembretesPorData();
-	}
-	
-	@PutMapping(value ="/atualizar/{id}")
-	public ResponseEntity< ? > atualizarLembrete(@PathVariable Long id, @RequestBody Lembrete lembrete){
-		return service.atualizarLembrete(id, lembrete);
 	}
 	
 	@DeleteMapping(value = "/deletar/{id}")

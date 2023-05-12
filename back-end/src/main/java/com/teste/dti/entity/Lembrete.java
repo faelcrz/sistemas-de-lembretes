@@ -26,8 +26,8 @@ public class Lembrete {
 	
 	@Future(message = "A data precisa estar no futuro.")
 	@NotNull(message = "O campo “Data” deve estar preenchido")
-	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date data;
 
 	public long getId() {
@@ -53,6 +53,5 @@ public class Lembrete {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
-		
+			
 }
